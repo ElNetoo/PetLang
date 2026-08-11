@@ -1,4 +1,5 @@
 string pet = "Pantera"
+string especie = "gato"
 int idade = 3
 int dias = 0
 float peso = 4.2

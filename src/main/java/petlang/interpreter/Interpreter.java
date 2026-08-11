@@ -10,9 +10,9 @@ import java.util.Map;
 
 public class Interpreter extends PetLangBaseVisitor<Object> {
 
-    private final Map<String, Object> memory   = new HashMap<>();
-    private final Map<String, Pet>    pets      = new HashMap<>();
-    private final List<Pet>           ordem     = new ArrayList<>();
+    private final Map<String, Object> memory = new HashMap<>();
+    private final Map<String, Pet>    pets   = new HashMap<>();
+    private final List<Pet>           ordem  = new ArrayList<>();
 
     public List<Pet> getPets() {
         return ordem;
@@ -133,9 +133,24 @@ public class Interpreter extends PetLangBaseVisitor<Object> {
         };
     }
 
+    // ── helpers ──────────────────────────────────────────────
+
     private String resolvePetName(String idOrVar) {
+        // se a variável é "pet", pega o valor "Rex" da memória
         Object val = memory.get(idOrVar);
-        return val != null ? val.toString() : idOrVar;
+        if (val == null) return idOrVar;
+
+        String nomePet = val.toString();
+
+        // tenta associar espécie automaticamente
+        // procura na memória uma variável chamada "especie"
+        Object especieVal = memory.get("especie");
+        if (especieVal != null) {
+            Pet pet = getOrCreatePet(nomePet);
+            pet.especie = especieVal.toString();
+        }
+
+        return nomePet;
     }
 
     private Pet getOrCreatePet(String nome) {

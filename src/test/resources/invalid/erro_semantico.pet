@@ -1,2 +1,3 @@
 string pet = "Rex"
+string especie = "cachorro"
 feed bidu 150.0

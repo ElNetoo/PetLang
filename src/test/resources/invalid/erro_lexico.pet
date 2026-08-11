@@ -1,2 +1,3 @@
 string pet = "Rex"
+string especie = "cachorro"
 float peso = 8.5@

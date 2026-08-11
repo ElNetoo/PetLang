@@ -29,6 +29,16 @@ public class HtmlReportGenerator {
                         margin-bottom: 2rem;
                         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
                     }
+                    .especie {
+                        display: inline-block;
+                        background: #ede0ff;
+                        color: #5b2d8e;
+                        border-radius: 20px;
+                        padding: 2px 14px;
+                        font-size: 0.9rem;
+                        margin-left: 8px;
+                        font-weight: bold;
+                    }
                     table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
                     th { background: #5b2d8e; color: white; padding: 10px; text-align: left; }
                     td { padding: 10px; border-bottom: 1px solid #eee; }
@@ -50,8 +60,13 @@ public class HtmlReportGenerator {
             """);
 
         for (Pet pet : pets) {
+            String icone = resolverIcone(pet.especie);
+
             sb.append("<div class='card'>");
-            sb.append("<h2>🐶 ").append(pet.nome).append("</h2>");
+            sb.append("<h2>").append(icone).append(" ").append(pet.nome)
+              .append("<span class='especie'>").append(pet.especie).append("</span></h2>");
+
+            // Alimentações
             sb.append("<strong>🍖 Alimentações registradas:</strong><br>");
             if (pet.alimentacoes.isEmpty()) {
                 sb.append("<span class='empty'>Nenhuma alimentação registrada.</span>");
@@ -64,6 +79,7 @@ public class HtmlReportGenerator {
                 sb.append("</table>");
             }
 
+            // Consultas
             sb.append("<br><strong>🏥 Consultas veterinárias:</strong><br>");
             if (pet.consultas.isEmpty()) {
                 sb.append("<span class='empty'>Nenhuma consulta registrada.</span>");
@@ -80,5 +96,14 @@ public class HtmlReportGenerator {
 
         Files.writeString(Path.of(outputPath), sb.toString());
         System.out.println("Relatório gerado: " + outputPath);
+    }
+
+    private static String resolverIcone(String especie) {
+        if (especie == null) return "🐾";
+        return switch (especie.toLowerCase()) {
+            case "cachorro" -> "🐶";
+            case "gato"     -> "🐱";
+            default         -> "🐾";
+        };
     }
 }
