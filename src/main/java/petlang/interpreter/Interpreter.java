@@ -43,7 +43,7 @@ public class Interpreter extends PetLangBaseVisitor<Object> {
             case "feed" -> {
                 double quantidade = toDouble(visit(ctx.expr()));
                 Pet pet = getOrCreatePet(petName);
-                pet.alimentacoes.add(String.format("%.1fg", quantidade));
+                pet.alimentacoes.add(quantidade);
             }
             case "vet" -> {
                 String procedimento = stripQuotes(ctx.STRING_LIT().getText());
@@ -133,21 +133,28 @@ public class Interpreter extends PetLangBaseVisitor<Object> {
         };
     }
 
-    // ── helpers ──────────────────────────────────────────────
-
     private String resolvePetName(String idOrVar) {
-        // se a variável é "pet", pega o valor "Rex" da memória
         Object val = memory.get(idOrVar);
         if (val == null) return idOrVar;
 
         String nomePet = val.toString();
 
-        // tenta associar espécie automaticamente
-        // procura na memória uma variável chamada "especie"
         Object especieVal = memory.get("especie");
         if (especieVal != null) {
             Pet pet = getOrCreatePet(nomePet);
             pet.especie = especieVal.toString();
+        }
+
+        Object idadeVal = memory.get("idade");
+        if (idadeVal != null) {
+            Pet pet = getOrCreatePet(nomePet);
+            pet.idade = toInt(idadeVal);
+        }
+
+        Object pesoVal = memory.get("peso");
+        if (pesoVal != null) {
+            Pet pet = getOrCreatePet(nomePet);
+            pet.peso = toDouble(pesoVal);
         }
 
         return nomePet;
@@ -171,6 +178,12 @@ public class Interpreter extends PetLangBaseVisitor<Object> {
         if (val instanceof Integer i) return i.doubleValue();
         if (val instanceof Double  d) return d;
         throw new RuntimeException("Valor não numérico: " + val);
+    }
+
+    private int toInt(Object val) {
+        if (val instanceof Integer i) return i;
+        if (val instanceof Double  d) return d.intValue();
+        return 0;
     }
 
     private String stripQuotes(String s) {

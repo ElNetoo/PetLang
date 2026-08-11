@@ -1,0 +1,47 @@
+<div class="card">
+
+    <div class="card-header">
+        <span class="pet-icon">{{ICONE}}</span>
+        <div>
+            <div class="pet-name">{{NOME}}</div>
+            <span class="especie-badge">{{ESPECIE}}</span>
+        </div>
+    </div>
+
+    <div class="diagnosticos">
+
+        <div class="diag-card {{CLASSE_PESO}}">
+            <div class="label">Peso atual</div>
+            <div class="valor">{{VALOR_PESO}}</div>
+            <div class="status-texto">{{TEXTO_PESO}}</div>
+        </div>
+
+        <div class="diag-card {{CLASSE_RACAO}}">
+            <div class="label">Ração (média)</div>
+            <div class="valor">{{VALOR_RACAO}}</div>
+            <div class="status-texto">{{TEXTO_RACAO}}</div>
+        </div>
+
+        <div class="diag-card {{CLASSE_IDADE}}">
+            <div class="label">Idade</div>
+            <div class="valor">{{VALOR_IDADE}}</div>
+            <div class="status-texto">{{TEXTO_IDADE}}</div>
+        </div>
+
+    </div>
+
+    <div class="alertas">
+        {{ALERTAS}}
+    </div>
+
+    <section>
+        <h3>🍖 Histórico de Alimentações</h3>
+        {{TABELA_ALIMENTACOES}}
+    </section>
+
+    <section>
+        <h3>🏥 Consultas Veterinárias</h3>
+        {{CONSULTAS}}
+    </section>
+
+</div>
