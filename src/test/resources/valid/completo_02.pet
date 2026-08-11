@@ -1,0 +1,17 @@
+string pet = "Pantera"
+int idade = 3
+int dias = 0
+float peso = 4.2
+
+while dias < 5 {
+    feed pet 80.0
+    dias = dias + 1
+}
+
+if idade > 7 {
+    feed pet 60.0
+    vet pet "Check-up geriatrico"
+} else {
+    feed pet 80.0
+    vet pet "Vacina anual"
+}
