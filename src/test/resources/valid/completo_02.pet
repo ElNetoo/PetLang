@@ -1,18 +1,17 @@
 string pet = "Pantera"
 string especie = "gato"
-int idade = 3
+int idade = 1
 int dias = 0
-float peso = 4.2
+float peso = 6.0
 
-while dias < 5 {
-    feed pet 80.0
-    dias = dias + 1
-}
+feed pet 50.0
+feed pet 80.0
+feed pet 45.0
+feed pet 90.0
+feed pet 30.0
 
 if idade > 7 {
-    feed pet 60.0
     vet pet "Check-up geriatrico"
 } else {
-    feed pet 80.0
     vet pet "Vacina anual"
 }
