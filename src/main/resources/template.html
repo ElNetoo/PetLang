@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>PetLang — Relatório de Saúde</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -10,202 +12,324 @@
             padding: 0;
         }
 
+        :root {
+            --bg: #fdf3e3;
+            --card: #ffffff;
+            --ink: #2b1d12;
+            --muted: #8a7c6c;
+            --accent: #c1732e;
+            --accent-soft: #f5e4cf;
+        }
+
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--ink);
             min-height: 100vh;
-            padding: 2rem;
+            padding: 3rem;
         }
 
         .container {
-            max-width: 860px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
+        h1, .pet-name, .valor {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
         h1 {
-            color: white;
-            font-size: 2rem;
+            font-size: 1.9rem;
+            font-weight: 800;
             margin-bottom: 0.3rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .subtitle {
-            color: rgba(255,255,255,0.8);
+            color: var(--muted);
             margin-bottom: 2rem;
             font-size: 0.95rem;
         }
 
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 1.8rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+        .header-card {
+            background: linear-gradient(120deg, #fffaf3 0%, #fdeee0 100%);
+            border: 1px solid var(--accent-soft);
+            border-radius: 24px;
+            padding: 2.2rem 2.6rem;
+            margin-bottom: 2.5rem;
         }
 
-        .card-header {
+        .header-left {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid #f0f0f0;
+            gap: 1.4rem;
         }
 
         .pet-icon {
-            font-size: 2.5rem;
+            font-size: 2.4rem;
+            width: 76px;
+            height: 76px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #e8a163 0%, #d9773b 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .eyebrow {
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.25rem;
         }
 
         .pet-name {
-            font-size: 1.6rem;
-            font-weight: bold;
-            color: #2d2d2d;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--ink);
         }
 
         .especie-badge {
-            background: #ede0ff;
-            color: #5b2d8e;
+            background: var(--accent-soft);
+            color: var(--accent);
             border-radius: 20px;
-            padding: 3px 14px;
-            font-size: 0.85rem;
-            font-weight: bold;
+            padding: 4px 16px;
+            font-size: 0.9rem;
+            font-weight: 700;
             text-transform: capitalize;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 1.2rem;
+        }
+
+        section {
+            margin-bottom: 2.5rem;
         }
 
         .diagnosticos {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
+            gap: 1.2rem;
             margin-bottom: 1.5rem;
         }
 
         .diag-card {
-            border-radius: 12px;
-            padding: 1rem;
-            text-align: center;
+            border-radius: 18px;
+            padding: 1.4rem 1.6rem;
+            border: 1px solid;
+        }
+
+        .diag-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
         }
 
         .diag-card .label {
-            font-size: 0.75rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.3rem;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--muted);
         }
 
         .diag-card .valor {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 0.2rem;
+            font-size: 2.1rem;
+            font-weight: 800;
         }
 
-        .diag-card .status-texto {
-            font-size: 0.8rem;
+        .diag-card .valor .unidade {
+            font-size: 1.1rem;
             font-weight: 600;
+            color: var(--muted);
+            margin-left: 2px;
         }
 
-        .verde   { background: #e8f5e9; color: #2e7d32; }
-        .amarelo { background: #fff8e1; color: #f57f17; }
-        .vermelho { background: #ffebee; color: #c62828; }
-        .cinza   { background: #f5f5f5; color: #757575; }
+        .pill {
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 5px 14px;
+            border-radius: 999px;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pill::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: currentColor;
+            flex-shrink: 0;
+        }
+
+        .pill.verde    { background: #dcefdc; color: #2f7a3d; }
+        .pill.amarelo  { background: #f8e6c2; color: #b3791a; }
+        .pill.vermelho { background: #f5d6cf; color: #c14b3a; }
+        .pill.cinza    { background: #e6e0d6; color: #8a7c6c; }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        @media (max-width: 700px) {
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+
+        .verde    { background: #eaf5ea; border-color: #cfe7cf; color: #2f7a3d; }
+        .amarelo  { background: #fdf1dc; border-color: #f3ddb0; color: #b3791a; }
+        .vermelho { background: #fbe9e6; border-color: #f2cfc8; color: #c14b3a; }
+        .cinza    { background: #f2efe9; border-color: #e6e0d6; color: #8a7c6c; }
+
+        .alertas-card {
+            background: var(--card);
+            border: 1px solid #eee2d2;
+            border-radius: 18px;
+            padding: 0.5rem;
+        }
 
         .alertas {
             display: flex;
             flex-direction: column;
-            gap: 0.6rem;
-            margin-bottom: 1.2rem;
+            gap: 0;
         }
 
         .alerta {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            border-radius: 8px;
-            padding: 0.8rem 1rem;
-            font-size: 0.88rem;
-            color: #856404;
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            background: transparent;
+            border-radius: 0;
+            border-bottom: 1px solid #f1ece1;
+            padding: 1.1rem 1.2rem;
+            font-size: 0.98rem;
+            color: var(--ink);
+        }
+
+        .alertas .alerta:last-child {
+            border-bottom: none;
+        }
+
+        .alerta::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+            flex-shrink: 0;
         }
 
         .alerta.critico {
-            background: #ffebee;
-            border-color: #f44336;
-            color: #c62828;
+            color: currentColor;
+        }
+        .alerta.critico::before { background: #e05b46; }
+        .alerta.ok::before { background: #4caf50; }
+        .alerta::before { background: #eab04a; }
+
+        .consultas-card {
+            background: var(--card);
+            border: 1px solid #eee2d2;
+            border-radius: 14px;
+            padding: 0.9rem;
+            min-height: 60px;
         }
 
-        .alerta.ok {
-            background: #e8f5e9;
-            border-color: #4caf50;
-            color: #2e7d32;
-        }
-
-        section {
-            margin-bottom: 1.2rem;
-        }
-
-        section h3 {
-            font-size: 0.95rem;
-            color: #555;
-            margin-bottom: 0.6rem;
+        .table-card {
+            background: var(--card);
+            border: 1px solid #eee2d2;
+            border-radius: 14px;
+            overflow: hidden;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+            border-radius: 14px;
+            overflow: hidden;
         }
 
         th {
-            background: #5b2d8e;
-            color: white;
-            padding: 8px 12px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            padding: 12px 16px;
             text-align: left;
             font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         td {
-            padding: 8px 12px;
-            border-bottom: 1px solid #eee;
-            font-size: 0.9rem;
+            padding: 12px 16px;
+            border-bottom: 1px solid #f1ece1;
+            font-size: 0.98rem;
+            background: var(--card);
         }
 
         tr:hover td {
-            background: #f9f3ff;
+            background: #fdf8f0;
         }
 
+        .bar-track {
+            width: 120px;
+            height: 7px;
+            border-radius: 999px;
+            background: #f1ece1;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 999px;
+        }
+
+        .bar-fill.verde    { background: #4caf50; }
+        .bar-fill.amarelo  { background: #eab04a; }
+        .bar-fill.vermelho { background: #e05b46; }
+
         .badge {
-            display: inline-block;
-            background: #7b4dab;
-            color: white;
-            border-radius: 20px;
-            padding: 3px 14px;
-            font-size: 0.82rem;
-            margin: 3px;
+            display: block;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border-radius: 14px;
+            padding: 14px 18px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 10px;
         }
 
         .empty {
-            color: #aaa;
+            color: #b7ada0;
             font-style: italic;
             font-size: 0.88rem;
         }
 
         footer {
             text-align: center;
-            color: rgba(255,255,255,0.6);
-            font-size: 0.8rem;
-            margin-top: 2rem;
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-top: 2.5rem;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🐾 PetLang</h1>
-        <p class="subtitle">Relatório de Saúde e Diagnóstico Nutricional</p>
-
         {{CARDS}}
 
         <footer>
             Gerado por PetLang Compiler &mdash; Linguagem de Domínio Específico para Cuidados com Pets
             <br><br>
-            Desenvolvido por: <strong style="color: rgba(255,255,255,0.9);">Francisco Neto & Ianny Kerlyn</strong>
-</footer>
+            Desenvolvido por: <strong style="color: var(--accent);">Francisco Neto &amp; Ianny Kerlyn</strong>
+        </footer>
     </div>
 </body>
 </html>
