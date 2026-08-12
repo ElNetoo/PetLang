@@ -10,7 +10,6 @@ while dias < 7 {
 }
 
 if idade > 7 {
-    feed pet 100.0
     vet pet "Check-up geriatrico"
 } else {
     feed pet 150.0
