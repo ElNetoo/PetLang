@@ -60,38 +60,38 @@ public class HtmlReportGenerator {
 
         if (stPeso.equals("abaixo")) {
             sb.append("<div class='alerta critico'>")
-              .append("⚠️ Peso abaixo do ideal para ").append(pet.especie)
+              .append("Peso abaixo do ideal para ").append(pet.especie)
               .append(". Faixa recomendada: ").append(faixaPeso[0]).append("kg – ").append(faixaPeso[1])
               .append("kg. Considere aumentar a ração e consultar um veterinário.")
               .append("</div>");
         } else if (stPeso.equals("acima")) {
             sb.append("<div class='alerta critico'>")
-              .append("⚠️ Peso acima do ideal para ").append(pet.especie)
+              .append("Peso acima do ideal para ").append(pet.especie)
               .append(". Faixa recomendada: ").append(faixaPeso[0]).append("kg – ").append(faixaPeso[1])
               .append("kg. Considere reduzir a ração e consultar um veterinário.")
               .append("</div>");
         } else if (stPeso.equals("ideal")) {
             sb.append("<div class='alerta ok'>")
-              .append("✅ Peso dentro da faixa ideal para ").append(pet.especie)
+              .append("Peso dentro da faixa ideal para ").append(pet.especie)
               .append(" (").append(faixaPeso[0]).append("kg – ").append(faixaPeso[1]).append("kg).")
               .append("</div>");
         }
 
         if (stRacao.equals("insuficiente")) {
             sb.append("<div class='alerta'>")
-              .append("🟡 Quantidade de ração abaixo do recomendado para ").append(pet.especie)
+              .append("Quantidade de ração abaixo do recomendado para ").append(pet.especie)
               .append(". Ideal: ").append(faixaRac[0]).append("g – ").append(faixaRac[1]).append("g por refeição.")
               .append("</div>");
         } else if (stRacao.equals("excessiva")) {
             sb.append("<div class='alerta critico'>")
-              .append("🔴 Quantidade de ração acima do recomendado para ").append(pet.especie)
+              .append("Quantidade de ração acima do recomendado para ").append(pet.especie)
               .append(". Ideal: ").append(faixaRac[0]).append("g – ").append(faixaRac[1]).append("g por refeição.")
               .append("</div>");
         }
 
         if (pet.isIdoso()) {
             sb.append("<div class='alerta'>")
-              .append("🟡 Pet idoso — recomenda-se check-up veterinário semestral.")
+              .append("Pet idoso — recomenda-se check-up veterinário semestral.")
               .append("</div>");
         }
 
@@ -105,21 +105,28 @@ public class HtmlReportGenerator {
 
         StringBuilder sb = new StringBuilder();
         sb.append("<table>");
-        sb.append("<tr><th>#</th><th>Quantidade</th><th>Status</th></tr>");
+        sb.append("<tr><th>#</th><th>Quantidade</th><th>Proporção</th><th>Status</th></tr>");
 
         for (int i = 0; i < pet.alimentacoes.size(); i++) {
             double q = pet.alimentacoes.get(i);
             String status;
+            String corClasse;
             if (q < faixaRac[0]) {
-                status = "🟡 Insuficiente";
+                status = "Insuficiente";
+                corClasse = "amarelo";
             } else if (q > faixaRac[1]) {
-                status = "🔴 Excessiva";
+                status = "Excessiva";
+                corClasse = "vermelho";
             } else {
-                status = "✅ Adequada";
+                status = "Adequada";
+                corClasse = "verde";
             }
+            double percentual = Math.min(100.0, (q / faixaRac[1]) * 100.0);
             sb.append("<tr>")
               .append("<td>").append(i + 1).append("</td>")
               .append("<td>").append(String.format("%.1fg", q)).append("</td>")
+              .append("<td><div class='bar-track'><div class='bar-fill ").append(corClasse)
+              .append("' style='width:").append(String.format("%.0f", percentual)).append("%'></div></div></td>")
               .append("<td>").append(status).append("</td>")
               .append("</tr>");
         }
@@ -149,10 +156,10 @@ public class HtmlReportGenerator {
     }
 
     private static String textoPeso(String status) {
-        if (status.equals("ideal"))  return "✅ Ideal";
-        if (status.equals("abaixo")) return "🔴 Abaixo";
-        if (status.equals("acima"))  return "🔴 Acima";
-        return "⚪ N/A";
+        if (status.equals("ideal"))  return "Ideal";
+        if (status.equals("abaixo")) return "Abaixo";
+        if (status.equals("acima"))  return "Acima";
+        return "N/A";
     }
 
     private static String classeRacao(String status) {
@@ -163,10 +170,10 @@ public class HtmlReportGenerator {
     }
 
     private static String textoRacao(String status) {
-        if (status.equals("adequada"))     return "✅ Adequada";
-        if (status.equals("insuficiente")) return "🟡 Insuficiente";
-        if (status.equals("excessiva"))    return "🔴 Excessiva";
-        return "⚪ N/A";
+        if (status.equals("adequada"))     return "Adequada";
+        if (status.equals("insuficiente")) return "Insuficiente";
+        if (status.equals("excessiva"))    return "Excessiva";
+        return "N/A";
     }
 
     private static String classeIdade(String status) {
@@ -176,9 +183,9 @@ public class HtmlReportGenerator {
     }
 
     private static String textoIdade(String status) {
-        if (status.equals("adulto")) return "✅ Adulto";
-        if (status.equals("idoso"))  return "🟡 Idoso";
-        return "⚪ N/A";
+        if (status.equals("adulto")) return "Adulto";
+        if (status.equals("idoso"))  return "Idoso";
+        return "N/A";
     }
 
     private static String resolverIcone(String especie) {
