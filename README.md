@@ -65,7 +65,7 @@ if idade > 7 {
 ```bash
 # Válidos
 java -jar target/petlang-compiler-1.0-SNAPSHOT-jar-with-dependencies.jar src/test/resources/valid/completo.pet
-java -jar target/petlang-compiler-1.0-SNAPSHOT-jar-with-dependencies.jar src/test/resources/valid/segundo_teste.pet
+java -jar target/petlang-compiler-1.0-SNAPSHOT-jar-with-dependencies.jar src/test/resources/valid/completo_02.pet
 
 # Inválidos
 java -jar target/petlang-compiler-1.0-SNAPSHOT-jar-with-dependencies.jar src/test/resources/invalid/erro_lexico.pet
