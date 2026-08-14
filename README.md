@@ -93,6 +93,6 @@ domainCommand → 'feed' ID expr | 'vet' ID STRING_LIT
 ifStmt        → 'if' expr block ( 'else' block )?
 whileStmt     → 'while' expr block
 block         → '{' statement* '}'
-expr          → ID | INT_LIT | FLOAT_LIT | STRING_LIT | expr OP expr | '(' expr ')'
-OP            → '+' | '-' | '*' | '/' | '>' | '<' | '>=' | '<=' | '==' | '!='
+expr → ID | INT_LIT | FLOAT_LIT | STRING_LIT | expr OP expr | '(' expr ')'
+OP   → '+' | '-' | '*' | '/' | '>' | '<' | '>=' | '<=' | '==' | '!=' | '&&' | '||'
 ```
