@@ -32,7 +32,7 @@ Após a execução, abra o `relatorio.html` gerado na raiz do projeto.
 | Comando | Descrição | Exemplo |
 |---|---|---|
 | `feed` | Registra uma alimentação em gramas | `feed pet 150.0` |
-| `vet` | Registra uma consulta veterinária | `vet pet "Check-up geriatrico"` |
+| `vet` | Recomenda uma consulta veterinária | `vet pet "Check-up geriatrico"` |
 
 ---
 
