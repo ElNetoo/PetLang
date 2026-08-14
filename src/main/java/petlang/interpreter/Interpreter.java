@@ -13,9 +13,14 @@ public class Interpreter extends PetLangBaseVisitor<Object> {
     private final Map<String, Object> memory = new HashMap<>();
     private final Map<String, Pet>    pets   = new HashMap<>();
     private final List<Pet>           ordem  = new ArrayList<>();
+    private boolean temComandoDominio = false;
 
     public List<Pet> getPets() {
         return ordem;
+    }
+
+    public boolean hasComandoDominio() {
+        return temComandoDominio;
     }
 
     @Override
@@ -41,11 +46,13 @@ public class Interpreter extends PetLangBaseVisitor<Object> {
 
         switch (cmd) {
             case "feed" -> {
+                temComandoDominio = true;
                 double quantidade = toDouble(visit(ctx.expr()));
                 Pet pet = getOrCreatePet(petName);
                 pet.alimentacoes.add(quantidade);
             }
             case "vet" -> {
+                temComandoDominio = true;
                 String procedimento = stripQuotes(ctx.STRING_LIT().getText());
                 Pet pet = getOrCreatePet(petName);
                 pet.consultas.add(procedimento);
@@ -77,6 +84,17 @@ public class Interpreter extends PetLangBaseVisitor<Object> {
     public Object visitBlock(PetLangParser.BlockContext ctx) {
         ctx.statement().forEach(this::visit);
         return null;
+    }
+
+    @Override
+    public Object visitLogicExpr(PetLangParser.LogicExprContext ctx) {
+        boolean left = isTruthy(visit(ctx.expr(0)));
+        String op    = ctx.op.getText();
+        if (op.equals("&&")) {
+            return left && isTruthy(visit(ctx.expr(1))) ? 1 : 0;
+        } else {
+            return left || isTruthy(visit(ctx.expr(1))) ? 1 : 0;
+        }
     }
 
     @Override

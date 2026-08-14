@@ -49,6 +49,7 @@ expr
     | expr op=('*'|'/') expr                              # MulDivExpr
     | expr op=('+'|'-') expr                              # AddSubExpr
     | expr op=('>'|'<'|'>='|'<='|'=='|'!=') expr          # CompareExpr
+    | expr op=('&&'|'||') expr                            # LogicExpr
     | INT_LIT                                             # IntLitExpr
     | FLOAT_LIT                                           # FloatLitExpr
     | STRING_LIT                                          # StringLitExpr
@@ -65,6 +66,8 @@ FLOAT_T  : 'float';
 STRING_T : 'string';
 FEED     : 'feed';
 VET      : 'vet';
+AND      : '&&';
+OR       : '||';
 
 ID         : [a-zA-Z_][a-zA-Z_0-9]*;
 

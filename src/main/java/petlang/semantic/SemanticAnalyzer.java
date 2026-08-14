@@ -112,7 +112,18 @@ public class SemanticAnalyzer extends PetLangBaseVisitor<SymbolTable.Type> {
         return SymbolTable.Type.INT;
     }
 
-
+    @Override
+    public SymbolTable.Type visitLogicExpr(PetLangParser.LogicExprContext ctx) {
+        SymbolTable.Type left  = visit(ctx.expr(0));
+        SymbolTable.Type right = visit(ctx.expr(1));
+        if (left == SymbolTable.Type.STRING || right == SymbolTable.Type.STRING) {
+            throw new RuntimeException(
+                "[Erro Semântico] Linha " + ctx.getStart().getLine() +
+                ": operador lógico não pode ser usado com strings."
+            );
+        }
+        return SymbolTable.Type.INT;
+    }
 
     private SymbolTable.Type checkArithmeticOp(
             PetLangParser.ExprContext left,

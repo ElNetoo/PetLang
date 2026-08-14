@@ -37,8 +37,7 @@ public class Main {
         });
 
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        tokens.fill(); 
-
+        tokens.fill();
 
         for (Token token : tokens.getTokens()) {
             if (token.getType() == PetLangLexer.UNRECOGNIZED) {
@@ -81,6 +80,12 @@ public class Main {
 
         Interpreter interpreter = new Interpreter();
         interpreter.visit(tree);
+
+        if (!interpreter.hasComandoDominio()) {
+            System.out.println("Alerta: Nenhum comando de domínio encontrado (feed/vet).");
+            return;
+        }
+
         System.out.println("Interpretação: OK");
         HtmlReportGenerator.generate(interpreter.getPets(), "relatorio.html");
     }

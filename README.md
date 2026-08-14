@@ -43,19 +43,24 @@ string pet = "Rex"
 string especie = "cachorro"
 int idade = 9
 int dias = 0
-float peso = 17
+float peso = 14.5
 
-while dias < 7 {
+while dias < 6 {
     feed pet 150.0
     dias = dias + 1
 }
 
-if peso > 15.0 {
-    vet pet "Peso acima do ideal - possível obesidade"
+if idade >= 8 {
+    vet pet "Recomenda-se check-up geriatrico"
+} 
+
+if peso >= 8.0 && peso <= 15.0 {
+    feed pet 150.0
 }
 
-if peso < 8.0 {
-    vet pet "Peso abaixo do ideal - possível desnutrição"
+else{
+    feed pet 0.0
+    vet pet "Recomenda-se consulta para tratar peso."
 }
 ```
 
@@ -72,6 +77,7 @@ java -jar target/petlang-compiler-1.0-SNAPSHOT-jar-with-dependencies.jar src/tes
 java -jar target/petlang-compiler-1.0-SNAPSHOT-jar-with-dependencies.jar src/test/resources/invalid/erro_lexico.pet
 java -jar target/petlang-compiler-1.0-SNAPSHOT-jar-with-dependencies.jar src/test/resources/invalid/erro_sintatico.pet
 java -jar target/petlang-compiler-1.0-SNAPSHOT-jar-with-dependencies.jar src/test/resources/invalid/erro_semantico.pet
+java -jar target/petlang-compiler-1.0-SNAPSHOT-jar-with-dependencies.jar src/test/resources/invalid/erro_sem_dominio.pet
 ```
 
 ---
