@@ -48,7 +48,7 @@ expr
     : '(' expr ')'                                        # ParenExpr
     | expr op=('*'|'/') expr                              # MulDivExpr
     | expr op=('+'|'-') expr                              # AddSubExpr
-    | expr op=('>'|'<'|'>='|'<='|'=='|'!=') expr         # CompareExpr
+    | expr op=('>'|'<'|'>='|'<='|'=='|'!=') expr          # CompareExpr
     | INT_LIT                                             # IntLitExpr
     | FLOAT_LIT                                           # FloatLitExpr
     | STRING_LIT                                          # StringLitExpr

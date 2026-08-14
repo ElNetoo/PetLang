@@ -43,18 +43,19 @@ string pet = "Rex"
 string especie = "cachorro"
 int idade = 9
 int dias = 0
-float peso = 12.5
+float peso = 17
 
 while dias < 7 {
     feed pet 150.0
     dias = dias + 1
 }
 
-if idade > 7 {
-    feed pet 100.0
-    vet pet "Check-up geriatrico"
-} else {
-    feed pet 150.0
+if peso > 15.0 {
+    vet pet "Peso acima do ideal - possível obesidade"
+}
+
+if peso < 8.0 {
+    vet pet "Peso abaixo do ideal - possível desnutrição"
 }
 ```
 

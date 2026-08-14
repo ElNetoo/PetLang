@@ -46,7 +46,7 @@ public class HtmlReportGenerator {
         card = card.replace("{{VALOR_RACAO}}",  pet.alimentacoes.isEmpty() ? "--" : String.format("%.1fg", pet.mediaRacao()));
         card = card.replace("{{TEXTO_RACAO}}",  textoRacao(stRacao));
         card = card.replace("{{CLASSE_IDADE}}", classeIdade(stIdade));
-        card = card.replace("{{VALOR_IDADE}}",  pet.idade > 0 ? pet.idade + " ano" : "--");
+        card = card.replace("{{VALOR_IDADE}}", pet.idade > 0 ? pet.idade + (pet.idade == 1 ? " ano" : " anos") : "--");
         card = card.replace("{{TEXTO_IDADE}}",  textoIdade(stIdade));
         card = card.replace("{{ALERTAS}}", renderAlertas(pet, stPeso, stRacao, faixaPeso, faixaRac));
         card = card.replace("{{TABELA_ALIMENTACOES}}", renderAlimentacoes(pet, faixaRac));

@@ -1,7 +1,6 @@
 string pet = "Pantera"
 string especie = "gato"
 int idade = 1
-int dias = 0
 float peso = 6.0
 
 feed pet 50.0
@@ -11,7 +10,8 @@ feed pet 90.0
 feed pet 30.0
 
 if idade > 7 {
-    vet pet "Check-up geriatrico"
-} else {
+    vet pet "Recomanda-se check-up geriatrico"
+} 
+else {
     vet pet "Vacina anual"
 }
