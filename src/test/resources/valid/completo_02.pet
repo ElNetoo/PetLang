@@ -1,6 +1,6 @@
 string pet = "Pantera"
 string especie = "gato"
-int idade = 1
+int idade = 3
 float peso = 3.0
 
 feed pet 50.0
