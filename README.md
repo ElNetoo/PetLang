@@ -15,11 +15,11 @@ Desenvolvido para a disciplina de Compiladores.
 
 ## Como rodar o projeto
 
-**Pré-requisitos:** Java 17+ e Maven 3.8+
+**Pré-requisitos:** Java 17+, Maven 3.8+ e extensão Live Server
 
 ```bash
 
-mvn package
+mvn clean package
 java -jar target/petlang-compiler-1.0-SNAPSHOT-jar-with-dependencies.jar <arquivo.pet>
 ```
 
